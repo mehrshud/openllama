@@ -1,0 +1,86 @@
+use src::models::User;
+use src::config::Config;
+use src::services::core::CoreService;
+
+class DiagramGenerator:
+    """
+    Generates a Mermaid.js architecture diagram for the OpenLlama system.
+
+    Attributes:
+    config (Config): The system configuration.
+    """
+
+    def __init__(self, config: Config):
+        """
+        Initializes the diagram generator.
+
+        Args:
+        config (Config): The system configuration.
+        """
+        self.config = config
+
+    def generate_diagram(self) -> str:
+        """
+        Generates the Mermaid.js architecture diagram.
+
+        Returns:
+        str: The generated diagram.
+
+        Raises:
+        Exception: If an error occurs during diagram generation.
+        """
+        try:
+            # Start the diagram
+            diagram = "```mermaid\n"
+            diagram += "graph LR\n"
+
+            # Add the API gateway
+            diagram += "    API_Gateway[API Gateway]\n"
+
+            # Add the core service layer
+            diagram += "    Core_Service[Core Service]\n"
+            diagram += "    API_Gateway --> Core_Service\n"
+
+            # Add the education-focused service layer
+            diagram += "    Education_Service[Education Service]\n"
+            diagram += "    Core_Service --> Education_Service\n"
+
+            # Add the research-oriented service layer
+            diagram += "    Research_Service[Research Service]\n"
+            diagram += "    Core_Service --> Research_Service\n"
+
+            # Add the data repository
+            diagram += "    Data_Repository[Data Repository]\n"
+            diagram += "    Education_Service --> Data_Repository\n"
+            diagram += "    Research_Service --> Data_Repository\n"
+
+            # Add the database operations
+            diagram += "    Database[Database]\n"
+            diagram += "    Data_Repository --> Database\n"
+
+            # Add the Llama model, TensorFlow, and PyTorch
+            diagram += "    Llama_Model[Llama Model]\n"
+            diagram += "    TensorFlow[TensorFlow]\n"
+            diagram += "    PyTorch[PyTorch]\n"
+            diagram += "    Research_Service --> Llama_Model\n"
+            diagram += "    Research_Service --> TensorFlow\n"
+            diagram += "    Research_Service --> PyTorch\n"
+
+            # End the diagram
+            diagram += "```"
+
+            return diagram
+
+        except Exception as e:
+            print(f"Error generating diagram: {e}")
+            return None
+
+def main():
+    # Example usage
+    config = Config(debug=True, db_url="localhost:5432")
+    generator = DiagramGenerator(config)
+    diagram = generator.generate_diagram()
+    print(diagram)
+
+if __name__ == "__main__":
+    main()
