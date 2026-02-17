@@ -1,0 +1,57 @@
+# Rust
+/target/
+Cargo.lock
+*.rs.bk
+
+# TensorFlow
+/tensorflow_logs/
+*.tfignore
+
+# PyTorch
+/.pytorch/
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+build/
+
+# IDE files
+.vscode/
+.intelliJ/
+*.idea/
+*.ipynb_checkpoints/
+*.vs
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Docker
+Dockerfile
+*.dockerignore
+
+# Terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+
+# Secrets
+.secrets/
+*.secret
+*.key
+*.env
+secrets.json
+secrets.yaml
+config.json
+config.yaml
+
+# Miscellaneous
+node_modules/
+package-lock.json
+yarn.lock
+yarn-error.log
+npm-debug.log
